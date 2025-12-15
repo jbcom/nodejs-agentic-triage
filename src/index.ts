@@ -29,7 +29,7 @@
  *
  * @example SDK Usage
  * ```typescript
- * import { assess, generate, getOctokit } from '@strata/triage';
+ * import { assess, generate } from '@strata/triage';
  *
  * // Assess an issue programmatically
  * await assess(123, { verbose: true });
@@ -155,30 +155,25 @@ export {
 export { createPlaywrightClient, getPlaywrightTools, PLAYWRIGHT_TOOLS, type PlaywrightOptions } from './playwright.js';
 
 // ============================================================================
-// GitHub API (Octokit)
+// GitHub (MCP)
 // ============================================================================
 
 /**
- * Advanced GitHub API operations via Octokit REST and GraphQL
+ * GitHub operations via MCP (no `gh`, no Octokit).
  *
- * Provides:
- * - PR state management (draft/ready, auto-merge)
- * - Review operations (comments, replies, submissions)
- * - Check run monitoring and creation
- * - Security alerts (CodeQL, Dependabot)
- *
- * @example
- * ```typescript
- * import { getOctokit, enableAutoMerge, waitForChecks } from '@strata/triage';
- *
- * const octokit = getOctokit();
- * await enableAutoMerge(144, 'SQUASH');
- * await waitForChecks(144);
- * ```
+ * This package intentionally uses MCP for GitHub access so that automation
+ * runs through tool calls and can be recorded/replayed deterministically.
  */
 export {
-    getOctokit,
     getRepoContext,
+    // Core issue/PR access
+    getIssue,
+    getPullRequest,
+    // Comments / labels
+    addIssueComment,
+    createIssueComment,
+    addIssueLabels,
+    commentOnPR,
     // PR Management
     convertPRToDraft,
     markPRReadyForReview,
@@ -204,39 +199,6 @@ export {
     type CodeScanningAlert,
     type DependabotAlert,
 } from './octokit.js';
-
-// ============================================================================
-// GitHub CLI Helpers
-// ============================================================================
-
-/**
- * GitHub CLI (`gh`) helpers for common operations
- *
- * Uses `execFileSync` for safe command execution without shell injection.
- *
- * @example
- * ```typescript
- * import { getIssue, createPR, commentOnPR } from '@strata/triage';
- *
- * const issue = getIssue(123);
- * const prUrl = createPR('fix/issue-123', 'Fix bug', 'Closes #123');
- * commentOnPR(144, 'LGTM!');
- * ```
- */
-export {
-    getIssue,
-    getPullRequest,
-    addLabels,
-    removeLabels,
-    commentOnIssue,
-    commentOnPR,
-    createBranch,
-    pushBranch,
-    createPR,
-    getDefaultBranch,
-    type Issue,
-    type PullRequest,
-} from './github.js';
 
 // ============================================================================
 // CLI Commands

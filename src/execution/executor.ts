@@ -117,6 +117,14 @@ export async function executePlan(
                 if (options.verbose) {
                     console.log(pc.green(`    ✓ Complete`));
                 }
+            } else if (result.status === 'skipped') {
+                // Skipped steps are not failures (e.g. plan-only mode)
+                completed.add(step.id);
+                stepsSkipped++;
+
+                if (options.verbose) {
+                    console.log(pc.dim(`    ↷ Skipped`));
+                }
             } else {
                 failed.add(step.id);
                 stepsFailed++;

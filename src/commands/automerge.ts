@@ -19,7 +19,7 @@ import {
     getPRReviews,
     submitPRReview,
 } from '../octokit.js';
-import { getPullRequest, commentOnPR } from '../github.js';
+import { commentOnPR, getPullRequest } from '../octokit.js';
 
 export interface AutomergeOptions {
     /** Action to perform */
@@ -45,7 +45,7 @@ export async function automerge(prNumber: number, options: AutomergeOptions): Pr
 
     console.log(pc.blue(`🔀 PR #${prNumber}: ${action}`));
 
-    const pr = getPullRequest(prNumber);
+    const pr = await getPullRequest(prNumber);
 
     if (verbose) {
         console.log(pc.dim(`Title: ${pr.title}`));
@@ -66,7 +66,7 @@ export async function automerge(prNumber: number, options: AutomergeOptions): Pr
                 await submitPRReview(prNumber, 'APPROVE', 'Auto-approved by @strata/triage');
             }
 
-            commentOnPR(prNumber, `✅ Auto-merge enabled (${mergeMethod})\n\n_Managed by @strata/triage_`);
+            await commentOnPR(prNumber, `✅ Auto-merge enabled (${mergeMethod})\n\n_Managed by @strata/triage_`);
             console.log(pc.green('✅ Auto-merge enabled'));
             break;
         }

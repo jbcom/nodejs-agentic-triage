@@ -240,19 +240,29 @@ export async function getIssue(
 }
 
 /**
- * Create a comment on an issue via MCP
+ * Create a comment on an issue or PR via MCP.
+ *
+ * Notes:
+ * - GitHub treats PR comments as "issue comments" on the PR's issue thread.
  */
-export async function createIssueComment(
+export async function addIssueComment(
     issueNumber: number,
     body: string
 ): Promise<void> {
     const { owner, repo } = getRepoContext();
-    await callGitHubTool('create_issue_comment', {
+    await callGitHubTool('add_issue_comment', {
         owner,
         repo,
         issue_number: issueNumber,
         body,
     });
+}
+
+/**
+ * @deprecated Use addIssueComment()
+ */
+export async function createIssueComment(issueNumber: number, body: string): Promise<void> {
+    return addIssueComment(issueNumber, body);
 }
 
 /**
@@ -275,6 +285,23 @@ export async function updateIssue(
         issue_number: issueNumber,
         ...updates,
     });
+}
+
+/**
+ * Add labels to an issue without clobbering existing labels.
+ */
+export async function addIssueLabels(issueNumber: number, labels: string[]): Promise<void> {
+    if (labels.length === 0) return;
+    const issue = await getIssue(issueNumber);
+    const merged = Array.from(new Set([...issue.labels, ...labels]));
+    await updateIssue(issueNumber, { labels: merged });
+}
+
+/**
+ * Comment on a PR (issue comment thread).
+ */
+export async function commentOnPR(prNumber: number, body: string): Promise<void> {
+    return addIssueComment(prNumber, body);
 }
 
 /**

@@ -9,7 +9,7 @@
 
 import pc from 'picocolors';
 import { readFileSync, existsSync } from 'node:fs';
-import { execFileSync, spawnSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import { runAgenticTask, type MCPClient } from '../mcp.js';
 import {
     parseTestReport,
@@ -18,7 +18,7 @@ import {
     type TestReport,
     type TestResult,
 } from '../test-results.js';
-import { commentOnIssue, commentOnPR, addLabels } from '../github.js';
+import { commentOnPR } from '../octokit.js';
 
 const SYSTEM_PROMPT = `You are an expert test failure diagnostician for Strata, a procedural 3D graphics library for React Three Fiber.
 
@@ -170,7 +170,7 @@ ${result.text}
 ---
 _Analyzed by @strata/triage_`;
 
-            commentOnPR(pr, comment);
+            await commentOnPR(pr, comment);
             console.log(pc.dim(`Posted diagnosis to PR #${pr}`));
         }
 
@@ -218,20 +218,10 @@ async function createIssuesForFailures(
     for (const [key, group] of failureGroups) {
         const firstFailure = group[0];
 
-        // Check if issue already exists
-        const searchQuery = `is:issue is:open "${firstFailure.file}" in:body`;
-        try {
-            const existing = execFileSync('gh', ['issue', 'list', '--search', searchQuery, '--json', 'number', '--limit', '1'], {
-                encoding: 'utf-8',
-            });
-            const parsed = JSON.parse(existing);
-            if (parsed.length > 0) {
-                console.log(pc.dim(`Issue already exists for ${firstFailure.file}`));
-                continue;
-            }
-        } catch {
-            // Continue even if search fails
-        }
+        // NOTE: Creating/searching issues should be performed via GitHub MCP.
+        // This function is intentionally a no-op until the MCP-backed workflow is wired in.
+        console.log(pc.yellow(`[Not implemented] Would check/create issue for ${firstFailure.file}`));
+        continue;
 
         const title = `[Test Failure] ${firstFailure.name}`;
         const body = `## Test Failure Report
@@ -258,14 +248,7 @@ _Auto-created by @strata/triage_`;
         if (dryRun) {
             console.log(pc.yellow(`[Dry run] Would create issue: ${title}`));
         } else {
-            try {
-                spawnSync('gh', ['issue', 'create', '--title', title, '--body', body, '--label', 'bug,test-failure'], {
-                    encoding: 'utf-8',
-                });
-                console.log(pc.green(`Created issue: ${title}`));
-            } catch (err) {
-                console.log(pc.yellow(`Could not create issue: ${title}`));
-            }
+            console.log(pc.yellow(`[Not implemented] Would create issue: ${title}`));
         }
     }
 }

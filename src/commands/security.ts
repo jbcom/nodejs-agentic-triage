@@ -17,7 +17,7 @@ import {
     type CodeScanningAlert,
     type DependabotAlert,
 } from '../octokit.js';
-import { commentOnPR, commentOnIssue } from '../github.js';
+import { commentOnPR } from '../octokit.js';
 
 const SYSTEM_PROMPT = `You are a security expert analyzing code for vulnerabilities in Strata, a procedural 3D graphics library for React Three Fiber.
 
@@ -203,7 +203,7 @@ ${analysis}
 ---
 _Analyzed by @strata/triage_`;
 
-        commentOnPR(pr, comment);
+        await commentOnPR(pr, comment);
         console.log(pc.dim(`Posted security analysis to PR #${pr}`));
     }
 

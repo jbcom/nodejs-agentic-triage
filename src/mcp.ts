@@ -30,7 +30,7 @@
 import { experimental_createMCPClient as createMCPClient } from '@ai-sdk/mcp';
 import { Experimental_StdioMCPTransport as StdioMCPTransport } from '@ai-sdk/mcp/mcp-stdio';
 import { generateText, stepCountIs } from 'ai';
-import { getProvider, getModel, type ToolSet } from './ai.js';
+import { resolveModel, type ToolSet } from './ai.js';
 
 export type MCPClient = Awaited<ReturnType<typeof createMCPClient>>;
 
@@ -689,12 +689,11 @@ export async function runAgenticTask(options: AgenticTaskOptions): Promise<Agent
             throw new Error('No MCP tools available - check MCP server connections');
         }
 
-        const provider = getProvider();
-        const modelId = getModel();
+        const resolved = await resolveModel();
 
         // Run the AI with multi-step tool support
         const result = await generateText({
-            model: provider(modelId),
+            model: resolved.model,
             system: systemPrompt,
             prompt: userPrompt,
             tools,

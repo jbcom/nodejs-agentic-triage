@@ -15,7 +15,7 @@
 
 import pc from 'picocolors';
 import { generate } from '../ai.js';
-import { getIssue, getPullRequest } from '../github.js';
+import { getIssue, getPullRequest } from '../octokit.js';
 import {
     type ExecutionPlan,
     type PlanStep,
@@ -73,7 +73,7 @@ export async function planAssess(
     issueNumber: number,
     options: PlannerOptions
 ): Promise<ExecutionPlan> {
-    const issue = getIssue(issueNumber);
+    const issue = await getIssue(issueNumber);
 
     const trigger: PlanTrigger = {
         type: 'issue',
@@ -148,7 +148,7 @@ export async function planDevelop(
     issueNumber: number,
     options: PlannerOptions
 ): Promise<ExecutionPlan> {
-    const issue = getIssue(issueNumber);
+    const issue = await getIssue(issueNumber);
 
     const trigger: PlanTrigger = {
         type: 'issue',
@@ -261,7 +261,7 @@ export async function planReview(
     prNumber: number,
     options: PlannerOptions
 ): Promise<ExecutionPlan> {
-    const pr = getPullRequest(prNumber);
+    const pr = await getPullRequest(prNumber);
 
     const trigger: PlanTrigger = {
         type: 'pr',
