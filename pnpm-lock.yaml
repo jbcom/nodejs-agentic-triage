@@ -21,8 +21,8 @@ importers:
         specifier: ^5.0.0
         version: 5.0.113(zod@3.25.76)
       ai-sdk-ollama:
-        specifier: ^1.1.0
-        version: 1.1.0(ai@5.0.113(zod@3.25.76))(zod@3.25.76)
+        specifier: ^2.0.1
+        version: 2.0.1(ai@5.0.113(zod@3.25.76))(zod@3.25.76)
       commander:
         specifier: ^14.0.2
         version: 14.0.2
@@ -974,6 +974,9 @@ packages:
   '@standard-schema/spec@1.0.0':
     resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
 
+  '@standard-schema/spec@1.1.0':
+    resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
+
   '@types/aws-lambda@8.10.159':
     resolution: {integrity: sha512-SAP22WSGNN12OQ8PlCzGzRCZ7QDCwI85dQZbmpz7+mAk+L7j+wI7qnvmdKh+o7A5LaOp6QnOZ2NJphAZQTTHQg==}
 
@@ -1050,6 +1053,12 @@ packages:
     engines: {node: '>=22'}
     peerDependencies:
       ai: ^5.0.108
+
+  ai-sdk-ollama@2.0.1:
+    resolution: {integrity: sha512-LsyjIt3OTIp5u3Sc7yfjyVAh07WfYOb4vRiiFLK9ae4/Usmr0MVk2VbKhgumghEDtV3uSmZtEwUdmXV9LTxc7Q==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      ai: ^5.0.113
 
   ai@5.0.113:
     resolution: {integrity: sha512-26vivpSO/mzZj0k1Si2IpsFspp26ttQICHRySQiMrtWcRd5mnJMX2a8sG28vmZ38C+JUn1cWmfZrsLMxkSMw9g==}
@@ -2111,21 +2120,21 @@ snapshots:
   '@ai-sdk/provider-utils@3.0.18(zod@4.1.13)':
     dependencies:
       '@ai-sdk/provider': 2.0.0
-      '@standard-schema/spec': 1.0.0
+      '@standard-schema/spec': 1.1.0
       eventsource-parser: 3.0.6
       zod: 4.1.13
 
   '@ai-sdk/provider-utils@3.0.19(zod@3.25.76)':
     dependencies:
       '@ai-sdk/provider': 2.0.0
-      '@standard-schema/spec': 1.0.0
+      '@standard-schema/spec': 1.1.0
       eventsource-parser: 3.0.6
       zod: 3.25.76
 
   '@ai-sdk/provider-utils@3.0.19(zod@4.1.13)':
     dependencies:
       '@ai-sdk/provider': 2.0.0
-      '@standard-schema/spec': 1.0.0
+      '@standard-schema/spec': 1.1.0
       eventsource-parser: 3.0.6
       zod: 4.1.13
 
@@ -2778,6 +2787,8 @@ snapshots:
 
   '@standard-schema/spec@1.0.0': {}
 
+  '@standard-schema/spec@1.1.0': {}
+
   '@types/aws-lambda@8.10.159': {}
 
   '@types/chai@5.2.3':
@@ -2885,15 +2896,6 @@ snapshots:
       - supports-color
       - typescript
 
-  ai-sdk-ollama@1.1.0(ai@5.0.113(zod@3.25.76))(zod@3.25.76):
-    dependencies:
-      '@ai-sdk/provider': 2.0.0
-      '@ai-sdk/provider-utils': 3.0.19(zod@3.25.76)
-      ai: 5.0.113(zod@3.25.76)
-      ollama: 0.6.3
-    transitivePeerDependencies:
-      - zod
-
   ai-sdk-ollama@1.1.0(ai@5.0.113(zod@3.25.76))(zod@4.1.13):
     dependencies:
       '@ai-sdk/provider': 2.0.0
@@ -2903,6 +2905,15 @@ snapshots:
     transitivePeerDependencies:
       - zod
     optional: true
+
+  ai-sdk-ollama@2.0.1(ai@5.0.113(zod@3.25.76))(zod@3.25.76):
+    dependencies:
+      '@ai-sdk/provider': 2.0.0
+      '@ai-sdk/provider-utils': 3.0.19(zod@3.25.76)
+      ai: 5.0.113(zod@3.25.76)
+      ollama: 0.6.3
+    transitivePeerDependencies:
+      - zod
 
   ai@5.0.113(zod@3.25.76):
     dependencies:
