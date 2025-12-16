@@ -342,7 +342,7 @@ export {
 } from './test-results.js';
 
 // ============================================================================
-// Triage Providers
+// Triage Providers (Low-level)
 // ============================================================================
 
 /**
@@ -419,3 +419,74 @@ export {
     type TriageProvider,
     type UpdateIssueOptions,
 } from './providers/index.js';
+
+// ============================================================================
+// Triage Unified API & Tools (vendor-connectors pattern)
+// ============================================================================
+
+/**
+ * Unified Triage API following the vendor-connectors pattern
+ *
+ * Provides TWO interfaces (like vendor-connectors):
+ * 1. **Direct TypeScript API** - TriageConnectors class
+ * 2. **Vercel AI SDK Tools** - for use with agentic-control agents
+ *
+ * @example Direct API (TriageConnectors)
+ * ```typescript
+ * import { TriageConnectors } from '@strata/triage';
+ *
+ * const triage = new TriageConnectors();
+ *
+ * // Issue operations
+ * const issues = await triage.issues.list({ status: 'open' });
+ * await triage.issues.create({ title: 'Fix bug', type: 'bug' });
+ * await triage.issues.close('123', 'Fixed in PR #456');
+ *
+ * // Get ready work
+ * const ready = await triage.issues.getReadyWork({ limit: 5 });
+ * ```
+ *
+ * @example Vercel AI SDK Tools (for agentic-control)
+ * ```typescript
+ * import { getTriageTools } from '@strata/triage';
+ * import { generateText } from 'ai';
+ * import { anthropic } from '@ai-sdk/anthropic';
+ *
+ * const result = await generateText({
+ *   model: anthropic('claude-sonnet-4-20250514'),
+ *   tools: getTriageTools(),
+ *   prompt: 'Create a high-priority bug for the login timeout issue',
+ * });
+ * ```
+ */
+export {
+    // Individual tools for custom compositions
+    addLabelsTool,
+    closeIssueTool,
+    createIssueTool,
+    // Direct API
+    createTriageConnectors,
+    getCurrentSprintTool,
+    getIssueStatsTool,
+    getIssueTool,
+    // Vercel AI SDK Tools - main entry points
+    getIssueTools,
+    getPRCommentsTool,
+    getProjectTools,
+    getReadyWorkTool,
+    getReviewTools,
+    getTriageTools,
+    // Tool definitions for custom integrations
+    ISSUE_TOOL_DEFINITIONS,
+    listIssuesTool,
+    listSprintsTool,
+    PROJECT_TOOL_DEFINITIONS,
+    REVIEW_TOOL_DEFINITIONS,
+    removeLabelsTool,
+    searchIssuesTool,
+    // Utility for custom connector injection
+    setTriageConnectors,
+    TriageConnectors,
+    type TriageConnectorsConfig,
+    updateIssueTool,
+} from './triage/index.js';

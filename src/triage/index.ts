@@ -39,15 +39,40 @@
  * ```
  */
 
-export { TriageConnectors, type TriageConnectorsConfig } from './connectors.js';
+// =============================================================================
+// Direct API (TriageConnectors)
+// =============================================================================
+
+export { createTriageConnectors, TriageConnectors, type TriageConnectorsConfig } from './connectors.js';
+
+// =============================================================================
+// Vercel AI SDK Tools
+// =============================================================================
+
 export {
-    // Tool getter functions
-    getTriageTools,
+    // Individual tools for custom compositions
+    addLabelsTool,
+    closeIssueTool,
+    createIssueTool,
+    getCurrentSprintTool,
+    getIssueStatsTool,
+    getIssueTool,
+    // Tool getter functions (main entry points)
     getIssueTools,
+    getPRCommentsTool,
     getProjectTools,
+    getReadyWorkTool,
     getReviewTools,
+    getTriageTools,
     // Tool definitions for custom integrations
     ISSUE_TOOL_DEFINITIONS,
+    listIssuesTool,
+    listSprintsTool,
     PROJECT_TOOL_DEFINITIONS,
     REVIEW_TOOL_DEFINITIONS,
+    removeLabelsTool,
+    searchIssuesTool,
+    // Utility for custom connector injection
+    setTriageConnectors,
+    updateIssueTool,
 } from './tools.js';
