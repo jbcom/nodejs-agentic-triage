@@ -1,26 +1,26 @@
 {
-    "name": "agentic-triage",
+    "name": "@agentic/triage",
     "version": "0.2.1",
     "description": "AI-powered GitHub issue triage, PR review, and sprint planning CLI - powered by agentic-control and agentic-crew",
     "type": "module",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
-    "bin": {
-        "agentic-triage": "./dist/cli.js",
-        "triage": "./dist/cli.js"
-    },
     "exports": {
         ".": {
             "types": "./dist/index.d.ts",
             "import": "./dist/index.js"
         },
-        "./reporters/vitest": {
-            "types": "./dist/reporters/vitest.d.ts",
-            "import": "./dist/reporters/vitest.js"
+        "./schemas": {
+            "types": "./dist/schemas/index.d.ts",
+            "import": "./dist/schemas/index.js"
         },
-        "./reporters/playwright": {
-            "types": "./dist/reporters/playwright.d.ts",
-            "import": "./dist/reporters/playwright.js"
+        "./tools": {
+            "types": "./dist/tools/index.d.ts",
+            "import": "./dist/tools/index.js"
+        },
+        "./handlers": {
+            "types": "./dist/handlers/index.d.ts",
+            "import": "./dist/handlers/index.js"
         }
     },
     "scripts": {
@@ -76,7 +76,6 @@
     "dependencies": {
         "@ai-sdk/mcp": "^1.0.0-beta.33",
         "@playwright/mcp": "latest",
-        "agentic-control": "^1.1.0",
         "ai": "^5.0.0",
         "ai-sdk-ollama": "^2.0.1",
         "commander": "^14.0.2",
