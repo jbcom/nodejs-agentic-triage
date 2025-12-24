@@ -23,11 +23,8 @@ export interface AIConfig {
     host?: string;
 }
 
-// Cached provider instance
-let _customProvider: ReturnType<typeof createOllama> | null = null;
-
 /**
- * Get or create a custom Ollama provider instance
+ * Get or create a Ollama provider instance
  * Uses the default `ollama` export for local, or createOllama for cloud
  */
 export function getProvider(config: AIConfig = {}) {
@@ -46,14 +43,11 @@ export function getProvider(config: AIConfig = {}) {
     }
 
     // Create custom provider with auth headers for cloud
-    if (!_customProvider) {
-        _customProvider = createOllama({
-            baseURL: host,
-            headers: apiKey ? { Authorization: `Bearer ${apiKey}` } : undefined,
-        });
-    }
-
-    return _customProvider;
+    // Note: We don't cache this globally to avoid issues with different configurations
+    return createOllama({
+        baseURL: host,
+        headers: apiKey ? { Authorization: `Bearer ${apiKey}` } : undefined,
+    });
 }
 
 /**

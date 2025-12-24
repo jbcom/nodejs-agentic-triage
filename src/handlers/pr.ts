@@ -4,11 +4,20 @@ import type { PRAnalysis } from '../schemas/pr.js';
  * Handler for analyzing a PR
  */
 export async function handleAnalyzePR(prNumber: number, analysis: PRAnalysis) {
-    // Logic to store analysis or update PR labels/comments
+    try {
+        // Logic to store analysis or update PR labels/comments
+        // This is a placeholder for future implementation
 
-    return {
-        success: true,
-        message: `Analysis for PR #${prNumber} completed`,
-        analysis,
-    };
+        return {
+            success: true,
+            message: `Analysis for PR #${prNumber} completed`,
+            analysis,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message: `Failed to analyze PR #${prNumber}: ${error instanceof Error ? error.message : String(error)}`,
+            error,
+        };
+    }
 }

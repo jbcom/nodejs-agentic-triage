@@ -1,8 +1,8 @@
 /**
- * @strata/triage - AI-Powered Development Automation
+ * @agentic/triage - AI-Powered Development Automation
  *
- * The triage package provides a comprehensive CLI and SDK for automating
- * the entire development lifecycle of the Strata project:
+ * The triage package provides a comprehensive SDK for automating
+ * the entire development lifecycle:
  *
  * - **Issue Triage**: AI-powered assessment, labeling, and planning
  * - **Code Development**: Automated implementation from issues
@@ -12,34 +12,16 @@
  * - **Releases**: Conventional commits, changelog, versioning, npm publish
  * - **Sprint Planning**: Weighted prioritization, backlog balancing
  *
- * @example CLI Usage
- * ```bash
- * # Assess an issue
- * triage assess 123
- *
- * # Review a PR
- * triage review 144
- *
- * # Generate tests
- * triage generate src/core/math/noise.ts --type unit
- *
- * # Run release
- * triage release --dry-run
- * ```
- *
  * @example SDK Usage
  * ```typescript
- * import { assess, generate } from '@strata/triage';
- *
- * // Assess an issue programmatically
- * await assess(123, { verbose: true });
+ * import { aiGenerate, getTriageTools } from '@agentic/triage';
  *
  * // Generate with AI
- * const result = await generate(prompt, { systemPrompt });
+ * const result = await aiGenerate(prompt, { systemPrompt });
  * ```
  *
  * @packageDocumentation
- * @module @strata/triage
+ * @module @agentic/triage
  */
 
 // ============================================================================

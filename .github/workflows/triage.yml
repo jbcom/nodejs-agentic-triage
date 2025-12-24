@@ -47,20 +47,20 @@ jobs:
       (github.event_name == 'workflow_dispatch' && github.event.inputs.command == 'assess')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
         with:
           node-version: '22'
 
-      - name: Install agentic-triage
-        run: npm install -g agentic-triage@latest
+      - name: Install @agentic/triage
+        run: npm install -g @agentic/triage@latest
 
       - name: Assess issue
         run: |
           ISSUE_NUM="${{ github.event.issue.number || github.event.inputs.issue }}"
           if [ -n "$ISSUE_NUM" ]; then
-            agentic-triage assess "$ISSUE_NUM"
+            triage assess "$ISSUE_NUM"
           else
             echo "No issue number provided"
             exit 1
@@ -74,17 +74,17 @@ jobs:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.command == 'sprint'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
         with:
           node-version: '22'
 
-      - name: Install agentic-triage
-        run: npm install -g agentic-triage@latest
+      - name: Install @agentic/triage
+        run: npm install -g @agentic/triage@latest
 
       - name: Run sprint planning
-        run: agentic-triage sprint
+        run: triage sprint
 
   # ============================================
   # ROADMAP
@@ -94,17 +94,17 @@ jobs:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.command == 'roadmap'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
         with:
           node-version: '22'
 
-      - name: Install agentic-triage
-        run: npm install -g agentic-triage@latest
+      - name: Install @agentic/triage
+        run: npm install -g @agentic/triage@latest
 
       - name: Generate roadmap
-        run: agentic-triage roadmap
+        run: triage roadmap
 
   # ============================================
   # SECURITY
@@ -114,17 +114,17 @@ jobs:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.command == 'security'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
         with:
           node-version: '22'
 
-      - name: Install agentic-triage
-        run: npm install -g agentic-triage@latest
+      - name: Install @agentic/triage
+        run: npm install -g @agentic/triage@latest
 
       - name: Run security scan
-        run: agentic-triage security
+        run: triage security
 
   # ============================================
   # CASCADE
@@ -134,14 +134,14 @@ jobs:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.command == 'cascade'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
         with:
           node-version: '22'
 
-      - name: Install agentic-triage
-        run: npm install -g agentic-triage@latest
+      - name: Install @agentic/triage
+        run: npm install -g @agentic/triage@latest
 
       - name: Run cascade
-        run: agentic-triage cascade
+        run: triage cascade

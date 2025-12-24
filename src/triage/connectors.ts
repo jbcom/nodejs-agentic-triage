@@ -136,6 +136,17 @@ export class TriageConnectors {
         return this._provider;
     }
 
+    /**
+     * Reconfigure the connectors with a new configuration.
+     * This will reset the underlying provider.
+     */
+    async reconfigure(config: TriageConnectorsConfig): Promise<void> {
+        this.config = config;
+        this._provider = null;
+        this._initPromise = null;
+        await this.getProvider();
+    }
+
     private async initializeProvider(): Promise<void> {
         if (this.config.provider) {
             this._provider = createProvider(this.config.provider);
@@ -308,11 +319,6 @@ class IssueAPI {
  * @remarks This API is under development. Currently returns stubs.
  */
 class ProjectAPI {
-    // Will be used when project providers are implemented
-    constructor(_connectors: TriageConnectors) {
-        // Reserved for future use
-    }
-
     /**
      * List sprints/iterations
      */
@@ -348,11 +354,6 @@ class ProjectAPI {
  * @remarks This API is under development. Currently returns stubs.
  */
 class ReviewAPI {
-    // Will be used when review providers are implemented
-    constructor(_connectors: TriageConnectors) {
-        // Reserved for future use
-    }
-
     /**
      * Get PR review comments
      */

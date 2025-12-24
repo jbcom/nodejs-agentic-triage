@@ -76,37 +76,37 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/jbdevprimary/agentic-triage.git"
+        "url": "git+https://github.com/jbcom/nodejs-agentic-triage.git"
     },
-    "homepage": "https://github.com/jbdevprimary/agentic-triage#readme",
+    "homepage": "https://github.com/jbcom/nodejs-agentic-triage#readme",
     "bugs": {
-        "url": "https://github.com/jbdevprimary/agentic-triage/issues"
+        "url": "https://github.com/jbcom/nodejs-agentic-triage/issues"
     },
     "engines": {
         "node": ">=20"
     },
     "dependencies": {
-        "@ai-sdk/mcp": "^1.0.0-beta.33",
+        "@ai-sdk/mcp": "^1.0.0-beta.37",
         "@playwright/mcp": "latest",
-        "ai": "^5.0.0",
+        "ai": "^6.0.3",
         "ai-sdk-ollama": "^2.0.1",
         "commander": "^14.0.2",
         "glob": "^13.0.0",
         "octokit": "^5.0.5",
         "ollama": "^0.6.3",
         "picocolors": "^1.1.1",
-        "zod": "^3.23.8"
+        "zod": "^4.2.1"
     },
     "devDependencies": {
-        "@biomejs/biome": "^2.3.8",
-        "@playwright/test": "^1.49.0",
-        "@types/node": "^25.0.2",
+        "@biomejs/biome": "^2.3.10",
+        "@playwright/test": "^1.57.0",
+        "@types/node": "^25.0.3",
         "@vitest/coverage-v8": "^3.2.4",
         "husky": "^9.1.7",
         "lint-staged": "^16.2.7",
         "rimraf": "^6.1.2",
-        "tsx": "^4.19.0",
-        "typescript": "^5.3.0",
+        "tsx": "^4.21.0",
+        "typescript": "^5.9.3",
         "vitest": "^3.2.4"
     },
     "lint-staged": {
