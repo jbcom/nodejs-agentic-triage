@@ -1,0 +1,11 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "entryPoints": ["src/index.ts", "src/schemas/index.ts", "src/tools/index.ts", "src/handlers/index.ts"],
+    "out": "docs/api",
+    "plugin": [],
+    "includeVersion": true,
+    "excludeInternal": true,
+    "skipErrorChecking": true,
+    "name": "agentic-triage",
+    "readme": "README.md"
+}

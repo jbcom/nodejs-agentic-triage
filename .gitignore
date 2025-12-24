@@ -9,6 +9,7 @@ yarn.lock
 
 # Build output
 dist/
+docs/api/
 
 # Coverage
 coverage/

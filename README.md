@@ -223,9 +223,23 @@ pnpm run test:coverage
 # Build
 pnpm run build
 
+# Generate API documentation
+pnpm run docs:generate
+
 # Lint
 pnpm run check
+
+# Format
+pnpm run format
 ```
+
+## Examples
+
+Basic usage examples can be found in the [examples/](./examples/) directory:
+
+- [Basic Agent Setup](./examples/basic-agent.ts) - Using tools with Vercel AI SDK
+- [Selective Tools](./examples/selective-tools.ts) - Using a subset of available tools
+- [Custom Configuration](./examples/custom-config.ts) - Manual connector setup
 
 ## Related Projects
 
