@@ -191,52 +191,64 @@ export function formatForAI(report: TestReport): string {
     }
 
     // Failed tests
-    const failed = getFailedTests(report);
-    if (failed.length > 0) {
-        lines.push('## Failed Tests');
-        for (const test of failed) {
-            lines.push(`### ${test.fullName}`);
-            lines.push(`- File: ${test.file}${test.line ? `:${test.line}` : ''}`);
-            lines.push(`- Duration: ${test.duration}ms`);
-            if (test.error) {
-                lines.push('');
-                lines.push('**Error:**');
-                lines.push('```');
-                lines.push(test.error.message);
-                if (test.error.codeFrame) {
-                    lines.push('');
-                    lines.push(test.error.codeFrame);
-                }
-                lines.push('```');
-                if (test.error.diff) {
-                    lines.push('');
-                    lines.push('**Diff:**');
-                    lines.push('```diff');
-                    lines.push(test.error.diff);
-                    lines.push('```');
-                }
-            }
-            lines.push('');
-        }
-    }
+    formatFailedTests(lines, report);
 
     // Coverage
-    if (report.coverage) {
-        lines.push('## Coverage');
-        lines.push(`- Lines: ${report.coverage.lines.percentage.toFixed(1)}%`);
-        lines.push(`- Functions: ${report.coverage.functions.percentage.toFixed(1)}%`);
-        lines.push(`- Branches: ${report.coverage.branches.percentage.toFixed(1)}%`);
-        lines.push('');
-
-        const lowCoverage = getLowCoverageFiles(report, 80);
-        if (lowCoverage.length > 0) {
-            lines.push('### Low Coverage Files (<80%)');
-            for (const file of lowCoverage.slice(0, 10)) {
-                lines.push(`- ${file.path}: ${file.lines.percentage.toFixed(1)}%`);
-            }
-            lines.push('');
-        }
-    }
+    formatCoverage(lines, report);
 
     return lines.join('\n');
+}
+
+function formatFailedTests(lines: string[], report: TestReport) {
+    const failed = getFailedTests(report);
+    if (failed.length === 0) return;
+
+    lines.push('## Failed Tests');
+    for (const test of failed) {
+        lines.push(`### ${test.fullName}`);
+        lines.push(`- File: ${test.file}${test.line ? `:${test.line}` : ''}`);
+        lines.push(`- Duration: ${test.duration}ms`);
+        if (test.error) {
+            formatTestError(lines, test.error);
+        }
+        lines.push('');
+    }
+}
+
+function formatTestError(lines: string[], error: TestError) {
+    lines.push('');
+    lines.push('**Error:**');
+    lines.push('```');
+    lines.push(error.message);
+    if (error.codeFrame) {
+        lines.push('');
+        lines.push(error.codeFrame);
+    }
+    lines.push('```');
+    if (error.diff) {
+        lines.push('');
+        lines.push('**Diff:**');
+        lines.push('```diff');
+        lines.push(error.diff);
+        lines.push('```');
+    }
+}
+
+function formatCoverage(lines: string[], report: TestReport) {
+    if (!report.coverage) return;
+
+    lines.push('## Coverage');
+    lines.push(`- Lines: ${report.coverage.lines.percentage.toFixed(1)}%`);
+    lines.push(`- Functions: ${report.coverage.functions.percentage.toFixed(1)}%`);
+    lines.push(`- Branches: ${report.coverage.branches.percentage.toFixed(1)}%`);
+    lines.push('');
+
+    const lowCoverage = getLowCoverageFiles(report, 80);
+    if (lowCoverage.length > 0) {
+        lines.push('### Low Coverage Files (<80%)');
+        for (const file of lowCoverage.slice(0, 10)) {
+            lines.push(`- ${file.path}: ${file.lines.percentage.toFixed(1)}%`);
+        }
+        lines.push('');
+    }
 }
