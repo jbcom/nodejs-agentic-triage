@@ -319,6 +319,11 @@ class IssueAPI {
  * @remarks This API is under development. Currently returns stubs.
  */
 class ProjectAPI {
+    // Will be used when project providers are implemented
+    constructor(_connectors: TriageConnectors) {
+        // Reserved for future use
+    }
+
     /**
      * List sprints/iterations
      */
@@ -354,6 +359,11 @@ class ProjectAPI {
  * @remarks This API is under development. Currently returns stubs.
  */
 class ReviewAPI {
+    // Will be used when review providers are implemented
+    constructor(_connectors: TriageConnectors) {
+        // Reserved for future use
+    }
+
     /**
      * Get PR review comments
      */
