@@ -1,23 +1,23 @@
-import { generateObject, type LanguageModel } from 'ai';
-import { codeReviewSchema } from '../schemas/index.js';
+import type { CodeReview } from '../schemas/review.js';
 
 /**
- * Review a pull request or code snippet using the provided language model.
- *
- * @param code - The code or PR diff to review
- * @param model - The Vercel AI SDK model to use
- * @returns The structured review result
+ * Handler for submitting a code review
  */
-export async function reviewCode(code: string, model: LanguageModel) {
-  if (!code) {
-    throw new Error('Code or diff is required');
-  }
+export async function handleSubmitReview(prNumber: number, review: CodeReview) {
+    try {
+        // In a real implementation, this would call GitHub API via connectors
+        // For now, we'll use the existing stub or implement it in connectors
 
-  const result = await generateObject({
-    model,
-    schema: codeReviewSchema,
-    prompt: `Review the following code or diff and provide a summary and specific comments:\n\n${code}`,
-  });
-
-  return result.object;
+        return {
+            success: true,
+            message: `Review for PR #${prNumber} submitted with status: ${review.status}`,
+            review,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message: `Failed to submit review for PR #${prNumber}: ${error instanceof Error ? error.message : String(error)}`,
+            error,
+        };
+    }
 }

@@ -1,6 +1,12 @@
+<<<<<<< HEAD
+# agentic-triage Docker Image
+# AI-powered GitHub issue triage, PR review, and sprint planning CLI
+# Includes triage primitives for issue/PR management
+=======
 # @agentic/triage Docker Image
 # Portable triage primitives for AI agents
 # Vercel AI SDK-compatible tools for issue triage, PR review, and project management.
+>>>>>>> origin/main
 
 # =============================================================================
 # Stage 1: Build stage

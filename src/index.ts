@@ -1,25 +1,206 @@
 /**
- * @agentic/triage
+ * @agentic/triage - AI-Powered Development Automation
  *
- * Portable triage primitives for AI agents.
+ * The triage package provides a comprehensive SDK for automating
+ * the entire development lifecycle:
  *
- * This package provides provider-agnostic building blocks for:
- * - Sigma-weighted complexity evaluation
- * - Intelligent task routing
- * - Priority queue management
- * - Escalation logic
+ * - **Issue Triage**: AI-powered assessment, labeling, and planning
+ * - **Code Review**: AI-driven PR reviews and feedback handling
+ * - **Sprint Planning**: Weighted prioritization, backlog balancing
  *
- * All primitives are designed to work with ANY LLM/agent provider.
- * Actual provider implementations belong in @agentic/control.
+ * @example SDK Usage
+ * ```typescript
+ * import { aiGenerate, getTriageTools } from '@agentic/triage';
+ *
+ * // Generate with AI
+ * const result = await aiGenerate(prompt, { systemPrompt });
+ * ```
+ *
+ * @packageDocumentation
+ * @module @agentic/triage
  */
 
-// Core triage handlers and tools
-export * from './handlers/index.js';
-export * from './providers/index.js';
-// NEW: Queue management primitives
+// ============================================================================
+// AI SDK Primitives (Schemas, Tools, Handlers)
+// ============================================================================
+
+export * as handlers from './handlers/index.js';
+export * as schemas from './schemas/index.js';
+export * as tools from './tools/index.js';
+
+// ============================================================================
+// AI Integration
+// ============================================================================
+
+/**
+ * AI generation with Vercel AI SDK + Ollama Cloud
+ */
+export {
+    type AIConfig,
+    CLOUD_HOST,
+    DEFAULT_MODEL,
+    type GenerateOptions as AIGenerateOptions,
+    generate as aiGenerate,
+    generateWithTools,
+    getModel,
+    getProvider,
+} from './ai.js';
+
+// ============================================================================
+// Model Context Protocol (MCP)
+// ============================================================================
+
+export {
+    type AgenticTaskOptions,
+    type AgenticTaskResult,
+    CONTEXT7_TOOLS,
+    closeMCPClients,
+    createContext7Client,
+    createFilesystemClient,
+    createGitHubClient,
+    createInlineFilesystemClient,
+    createViteReactClient,
+    FILESYSTEM_TOOLS,
+    getAllTools,
+    getContext7Tools,
+    getFilesystemTools,
+    getGitHubTools,
+    getViteReactTools,
+    initializeMCPClients,
+    type MCPClient,
+    type MCPClientOptions,
+    type MCPClients,
+    runAgenticTask,
+    VITE_REACT_TOOLS,
+} from './mcp.js';
+
+export { createPlaywrightClient, getPlaywrightTools, PLAYWRIGHT_TOOLS, type PlaywrightOptions } from './playwright.js';
+
+// ============================================================================
+// GitHub (MCP)
+// ============================================================================
+
+export {
+    addIssueComment,
+    addIssueLabels,
+    areAllChecksPassing,
+    type CheckRun,
+    type CodeScanningAlert,
+    commentOnPR,
+    convertPRToDraft,
+    createCheckRun,
+    createIssueComment,
+    type DependabotAlert,
+    disableAutoMerge,
+    enableAutoMerge,
+    formatAlertsForAI,
+    getCheckRuns,
+    getCodeScanningAlerts,
+    getDependabotAlerts,
+    getIssue,
+    getPRCodeScanningAlerts,
+    getPRReviewComments,
+    getPRReviews,
+    getPullRequest,
+    getRepoContext,
+    markPRReadyForReview,
+    type ReviewComment,
+    replyToReviewComment,
+    submitPRReview,
+    waitForChecks,
+} from './octokit.js';
+
+// ============================================================================
+// Test Results
+// ============================================================================
+
+export {
+    type CoverageData,
+    type FileCoverage,
+    formatForAI,
+    getFailedTests,
+    getLowCoverageFiles,
+    getTestsByFile,
+    getUncoveredFunctions,
+    parseTestReport,
+    type TestError,
+    type TestFile,
+    type TestReport,
+    type TestResult,
+} from './test-results.js';
+
+// ============================================================================
+// Triage Providers
+// ============================================================================
+
+export {
+    BeadsProvider,
+    type BeadsProviderConfig,
+    type CreateIssueOptions,
+    clearProviders,
+    createBestProvider,
+    createProvider,
+    type DependencyType,
+    GitHubProvider,
+    type GitHubProviderConfig,
+    getAllProviders,
+    getCombinedStats,
+    getProvider as getTriageProvider,
+    type IssueDependency,
+    type IssuePriority,
+    type IssueStatus,
+    type IssueType,
+    type JiraProviderConfig,
+    type LinearProviderConfig,
+    type ListIssuesOptions,
+    normalizePriority,
+    normalizeStatus,
+    normalizeType,
+    type ProviderConfig,
+    type ProviderStats,
+    priorityToNumber,
+    type ReadyWork,
+    registerProvider,
+    syncAllProviders,
+    type TriageIssue,
+    type TriageProvider,
+    type UpdateIssueOptions,
+} from './providers/index.js';
+
+// ============================================================================
+// Triage Unified API & Tools
+// ============================================================================
+
+export {
+    addLabelsTool,
+    closeIssueTool,
+    createIssueTool,
+    createTriageConnectors,
+    getCurrentSprintTool,
+    getIssueStatsTool,
+    getIssueTool,
+    getIssueTools,
+    getPRCommentsTool,
+    getProjectTools,
+    getReadyWorkTool,
+    getReviewTools,
+    getTriageTools,
+    ISSUE_TOOL_DEFINITIONS,
+    listIssuesTool,
+    listSprintsTool,
+    PROJECT_TOOL_DEFINITIONS,
+    REVIEW_TOOL_DEFINITIONS,
+    removeLabelsTool,
+    searchIssuesTool,
+    setTriageConnectors,
+    TriageConnectors,
+    type TriageConnectorsConfig,
+    updateIssueTool,
+} from './triage/index.js';
+
+// ============================================================================
+// Queue & Scoring (from main)
+// ============================================================================
+
 export * from './queue/index.js';
-export * from './schemas/index.js';
-// NEW: Sigma-weighted scoring system
 export * from './scoring/index.js';
-export * from './tools/index.js';
-export * from './triage/index.js';

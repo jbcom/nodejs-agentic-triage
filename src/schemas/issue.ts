@@ -1,17 +1,19 @@
 import { z } from 'zod';
 
-export const issueSchema = z.object({
-  title: z.string().describe('The title of the issue.'),
-  body: z.string().describe('The body content of the issue.'),
-  type: z
-    .enum(['bug', 'feature', 'docs', 'test', 'refactor', 'chore'])
-    .describe('The type of the issue.'),
-  priority: z.enum(['low', 'medium', 'high', 'critical']).describe('The priority of the issue.'),
-  labels: z.array(z.string()).describe('A list of labels to apply to the issue.'),
+export const IssueStatusSchema = z.enum(['open', 'in_progress', 'blocked', 'closed']);
+export const IssuePrioritySchema = z.enum(['critical', 'high', 'medium', 'low', 'backlog']);
+export const IssueTypeSchema = z.enum(['bug', 'feature', 'task', 'epic', 'chore', 'docs']);
+
+export const IssueTriageSchema = z.object({
+    title: z.string().describe('The cleaned up or optimized title for the issue'),
+    summary: z.string().describe('A concise summary of the issue'),
+    type: IssueTypeSchema.describe('The categorized type of the issue'),
+    priority: IssuePrioritySchema.describe('The determined priority based on impact and urgency'),
+    labels: z.array(z.string()).describe('Recommended labels for the issue'),
+    estimate: z.number().optional().describe('Optional story point estimate'),
+    actionItems: z
+        .array(z.string())
+        .describe('Concrete next steps or requirements discovered from the issue description'),
 });
 
-export const issueAnalysisSchema = z.object({
-  summary: z.string().describe('A brief summary of the issue.'),
-  impact: z.string().describe('The potential impact of the issue.'),
-  suggestions: z.array(z.string()).describe('Suggestions for how to address the issue.'),
-});
+export type IssueTriage = z.infer<typeof IssueTriageSchema>;

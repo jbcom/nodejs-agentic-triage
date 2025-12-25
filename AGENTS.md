@@ -166,11 +166,7 @@ Tools return structured errors that agents can understand:
 4. **Limit tool steps** - Use `maxSteps` to prevent infinite loops
 5. **Log tool calls** - Monitor what tools agents are using
 
-## Related
-
-- [README.md](./README.md) - Main documentation
-
-## Sigma-Weighted Scoring System (NEW)
+## Sigma-Weighted Scoring System
 
 The scoring module provides provider-agnostic complexity evaluation:
 
@@ -228,3 +224,7 @@ Tasks scored across 8 dimensions (0-10 each):
 - `risk_level` (0.05) - Breaking change risk
 
 Weighted score → tier → agent routing.
+
+## Related
+
+- [README.md](./README.md) - Main documentation
