@@ -202,5 +202,6 @@ export {
 // Queue & Scoring (from main)
 // ============================================================================
 
+export * from './mcp-server.js';
 export * from './queue/index.js';
 export * from './scoring/index.js';

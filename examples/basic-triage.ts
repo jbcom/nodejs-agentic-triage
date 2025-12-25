@@ -5,7 +5,7 @@ import { analyzeIssue } from '../src/index.js';
  * Basic example of using the analyzeIssue handler.
  */
 async function main() {
-  const issueBody = `
+    const issueBody = `
     Title: Bug in the login flow
     Description: Users are unable to login when using special characters in their passwords.
     Steps to reproduce:
@@ -17,18 +17,17 @@ async function main() {
     Expected result: Successful login
   `;
 
-  // Use a local Ollama model
-  const model = ollama('llama3');
+    // Use a local Ollama model
+    const model = ollama('llama3');
 
-  console.log('Analyzing issue...');
+    console.log('Analyzing issue...');
 
-  try {
-    // biome-ignore lint/suspicious/noExplicitAny: cast to any for example simplicity
-    const result = await analyzeIssue(issueBody, model as any);
-    console.log('Analysis result:', JSON.stringify(result, null, 2));
-  } catch (error) {
-    console.error('Error analyzing issue:', error);
-  }
+    try {
+        const result = await analyzeIssue(issueBody, model as any);
+        console.log('Analysis result:', JSON.stringify(result, null, 2));
+    } catch (error) {
+        console.error('Error analyzing issue:', error);
+    }
 }
 
 main();

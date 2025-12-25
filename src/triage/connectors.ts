@@ -107,8 +107,8 @@ export class TriageConnectors {
 
         // Initialize namespaced APIs
         this.issues = new IssueAPI(this);
-        this.projects = new ProjectAPI(this);
-        this.reviews = new ReviewAPI(this);
+        this.projects = new ProjectAPI();
+        this.reviews = new ReviewAPI();
     }
 
     /**
@@ -319,8 +319,6 @@ class IssueAPI {
  * @remarks This API is under development. Currently returns stubs.
  */
 class ProjectAPI {
-    constructor(_connectors: TriageConnectors) {}
-
     /**
      * List sprints/iterations
      */
@@ -356,8 +354,6 @@ class ProjectAPI {
  * @remarks This API is under development. Currently returns stubs.
  */
 class ReviewAPI {
-    constructor(_connectors: TriageConnectors) {}
-
     /**
      * Get PR review comments
      */

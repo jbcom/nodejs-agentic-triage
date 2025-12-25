@@ -106,14 +106,18 @@ export class GitHubProvider implements TriageProvider {
         const args = ['issue', 'close', id, '--repo', this.repo];
         if (reason) args.push('--comment', reason);
         this.gh(args);
-        return (await this.getIssue(id))!;
+        const issue = await this.getIssue(id);
+        if (!issue) throw new Error(`Failed to retrieve closed issue ${id}`);
+        return issue;
     }
 
     async reopenIssue(id: string, reason?: string): Promise<TriageIssue> {
         const args = ['issue', 'reopen', id, '--repo', this.repo];
         if (reason) args.push('--comment', reason);
         this.gh(args);
-        return (await this.getIssue(id))!;
+        const issue = await this.getIssue(id);
+        if (!issue) throw new Error(`Failed to retrieve reopened issue ${id}`);
+        return issue;
     }
 
     async listIssues(options?: ListIssuesOptions): Promise<TriageIssue[]> {
