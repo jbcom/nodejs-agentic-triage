@@ -9,27 +9,27 @@ import { createIssueTool, listIssuesTool, searchIssuesTool } from '../src/index.
  * only what the agent needs for a specific task.
  */
 async function main() {
-  try {
-    const minimalTools = {
-      listIssues: listIssuesTool,
-      createIssue: createIssueTool,
-      searchIssues: searchIssuesTool,
-    };
+    try {
+        const minimalTools = {
+            listIssues: listIssuesTool,
+            createIssue: createIssueTool,
+            searchIssues: searchIssuesTool,
+        };
 
-    console.log('Available minimal tools:', Object.keys(minimalTools));
+        console.log('Available minimal tools:', Object.keys(minimalTools));
 
-    const result = await generateText({
-      model: anthropic('claude-3-5-sonnet-latest'),
-      tools: minimalTools,
-      maxSteps: 5,
-      prompt: 'List the open issues and create a summary report.',
-    });
+        const result = await generateText({
+            model: anthropic('claude-3-5-sonnet-latest'),
+            tools: minimalTools,
+            maxSteps: 5,
+            prompt: 'List the open issues and create a summary report.',
+        });
 
-    console.log(result.text);
-  } catch (error) {
-    console.error('Failed to run agent:', error);
-    process.exit(1);
-  }
+        console.log(result.text);
+    } catch (error) {
+        console.error('Failed to run agent:', error);
+        process.exit(1);
+    }
 }
 
 main().catch(console.error);

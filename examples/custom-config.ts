@@ -7,26 +7,26 @@ import { getTriageTools, setTriageConnectors, TriageConnectors } from '../src/in
  * but you can also configure them programmatically.
  */
 async function main() {
-  try {
-    // Configure before using tools
-    const connectors = new TriageConnectors({
-      provider: 'github',
-      github: {
-        repo: process.env.GITHUB_REPO || 'myorg/myrepo',
-        token: process.env.GITHUB_TOKEN,
-      },
-    });
+    try {
+        // Configure before using tools
+        const connectors = new TriageConnectors({
+            provider: 'github',
+            github: {
+                repo: process.env.GITHUB_REPO || 'myorg/myrepo',
+                token: process.env.GITHUB_TOKEN,
+            },
+        });
 
-    setTriageConnectors(connectors);
+        setTriageConnectors(connectors);
 
-    // Now tools will use this configuration
-    const _tools = getTriageTools();
+        // Now tools will use this configuration
+        const _tools = getTriageTools();
 
-    console.log(`Tools configured for ${process.env.GITHUB_REPO || 'myorg/myrepo'}`);
-  } catch (error) {
-    console.error('Configuration failed:', error);
-    process.exit(1);
-  }
+        console.log(`Tools configured for ${process.env.GITHUB_REPO || 'myorg/myrepo'}`);
+    } catch (error) {
+        console.error('Configuration failed:', error);
+        process.exit(1);
+    }
 }
 
 main().catch(console.error);

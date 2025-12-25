@@ -11,19 +11,19 @@ import { getTriageTools } from '../src/index.js';
  * 3. Run a simple triage task
  */
 async function main() {
-  try {
-    const result = await generateText({
-      model: anthropic('claude-3-5-sonnet-latest'),
-      tools: getTriageTools(),
-      maxSteps: 10,
-      prompt: 'Find all open critical bugs and summarize them.',
-    });
+    try {
+        const result = await generateText({
+            model: anthropic('claude-3-5-sonnet-latest'),
+            tools: getTriageTools(),
+            maxSteps: 10,
+            prompt: 'Find all open critical bugs and summarize them.',
+        });
 
-    console.log(result.text);
-  } catch (error) {
-    console.error('Failed to generate text:', error);
-    process.exit(1);
-  }
+        console.log(result.text);
+    } catch (error) {
+        console.error('Failed to generate text:', error);
+        process.exit(1);
+    }
 }
 
 main().catch(console.error);
