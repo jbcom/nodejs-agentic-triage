@@ -48,6 +48,7 @@
         "format:check": "biome format .",
         "check": "biome check .",
         "check:fix": "biome check --write .",
+        "docs": "typedoc",
         "prepare": "husky"
     },
     "keywords": [
@@ -109,6 +110,7 @@
         "lint-staged": "^16.2.7",
         "rimraf": "^6.1.2",
         "tsx": "^4.21.0",
+        "typedoc": "^0.28.15",
         "typescript": "^5.9.3",
         "vitest": "^3.2.4"
     },
