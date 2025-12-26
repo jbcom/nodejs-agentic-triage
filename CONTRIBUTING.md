@@ -1,6 +1,10 @@
-# Contributing to agentic-triage
+# Contributing to @agentic-dev-library/triage
 
-Thank you for your interest in contributing to agentic-triage! This guide will help you get started.
+Thank you for your interest in contributing to **Agentic**, the AI & Agents division of the [jbcom enterprise](https://jbcom.github.io). This guide will help you get started with the `@agentic-dev-library/triage` repository.
+
+## 🏢 Enterprise Context
+
+All Agentic repositories follow unified enterprise standards for documentation, branding, and cross-organization interconnections.
 
 ## Table of Contents
 
@@ -32,13 +36,13 @@ This project follows the standard open source code of conduct. Be respectful, in
 
 2. **Clone your fork**:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/agentic-triage.git
-   cd agentic-triage
+   git clone https://github.com/YOUR_USERNAME/triage.git
+   cd triage
    ```
 
 3. **Add upstream remote**:
    ```bash
-   git remote add upstream https://github.com/jbdevprimary/agentic-triage.git
+   git remote add upstream https://github.com/agentic-dev-library/triage.git
    ```
 
 4. **Install dependencies**:
@@ -438,8 +442,8 @@ agentic-triage/
 ## Getting Help
 
 - **Documentation**: Check [README.md](./README.md) and [TESTING.md](./TESTING.md)
-- **Issues**: Search [existing issues](https://github.com/jbdevprimary/agentic-triage/issues)
-- **Discussions**: Ask in [GitHub Discussions](https://github.com/jbdevprimary/agentic-triage/discussions)
+- **Issues**: Search [existing issues](https://github.com/agentic-dev-library/triage/issues)
+- **Discussions**: Ask in [GitHub Discussions](https://github.com/agentic-dev-library/triage/discussions)
 - **Discord**: Join our community (link in README)
 
 ## Additional Resources
