@@ -15,8 +15,8 @@
  * - Manual workflow_dispatch
  */
 
-import { readdirSync, readFileSync, statSync, writeFileSync } from 'fs';
-import { join } from 'path';
+import { readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const OLLAMA_HOST = process.env.OLLAMA_HOST || 'https://ollama.com';
